@@ -1,103 +1,106 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import BrandStore from "@/components/store/brand/brandStore";
+import CateguryStore from "@/components/store/Categury/CateguryStore";
+import AmazingOffer from "@/components/store/component/AmazingOffer";
+import BannerStore, { PhotoStore } from "@/components/store/component/bannerStore";
+import BestSellerStore from "@/components/store/component/BestSeller/bestSellerStore";
+import BestVisited from "@/components/store/component/BestVisited";
+import BlogStore from "@/components/store/component/blogStore";
+import CategorizeByProducts from "@/components/store/component/CategorizeByProducts";
+import HeaderStore from "@/components/store/component/HeaderStore";
+import HotProduct from "@/components/store/component/HotProduct";
+import ProductList from "@/components/store/component/ProductList";
+import SliderStore from "@/components/store/component/SliderStore";
+
+export default function Page() {
+  const firstBanner = [
+    "https://dkstatics-public.digikala.com/digikala-adservice-banners/2a5b728f11d3419f5920d33fab49ecff7e9ae3ef_1745829043.jpg?x-oss-process=image/quality,q_95",
+    "https://dkstatics-public.digikala.com/digikala-adservice-banners/ccd8e454cd78595b2a0c87fb1b3bf2385554fb1e_1745827686.jpg?x-oss-process=image/quality,q_95",
+    "https://dkstatics-public.digikala.com/digikala-adservice-banners/6458345d6c93344c94d5090073c55257982741b5_1745398383.gif?x-oss-process=image",
+    "https://dkstatics-public.digikala.com/digikala-adservice-banners/d0ccf5778e39623a54924acaf54ead40a0caa7dc_1745819048.jpg?x-oss-process=image/quality,q_95",
+  ];
+  const SeccendBanner = [
+    "https://dkstatics-public.digikala.com/digikala-adservice-banners/1a5b3d33bf7b5b65d8229d1e40b7d1255c018269_1745839698.jpg?x-oss-process=image/quality,q_95",
+    "https://dkstatics-public.digikala.com/digikala-adservice-banners/21028e67b42b317c24adea34ab388ddcc1e45707_1745839819.jpg?x-oss-process=image/quality,q_95",
+    "https://dkstatics-public.digikala.com/digikala-adservice-banners/e02d45093f1821d5be48699f5de8da7b22de4b37_1745839856.jpg?x-oss-process=image/quality,q_95",
+  ];
+  const item = [
+    {
+      id: 1,
+      photo:
+        "https://dkstatics-public.digikala.com/digikala-products/bd5cd519a2e4b9b1c6818f0a10f96380766096d2_1728913311.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
+    },
+    {
+      id: 2,
+      photo:
+        "https://dkstatics-public.digikala.com/digikala-products/054c1367feaed01af7e00548a59ad216031deb3c_1731150585.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
+    },
+    {
+      id: 3,
+      photo:
+        "https://dkstatics-public.digikala.com/digikala-products/3659706.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
+    },
+    {
+      id: 4,
+      photo:
+        "https://dkstatics-public.digikala.com/digikala-products/3e05544c4ed75052123a3456707520741c815e0e_1701151848.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
+    },
+  ];
+
+  const Items2 = [
+    {
+      id: 1,
+      photo:
+        "https://dkstatics-public.digikala.com/digikala-products/c0a7ce006d11c222bce16bd3cdd8d79aeb6689bc_1738134271.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
+    },
+    {
+      id: 2,
+      photo:
+        "https://dkstatics-public.digikala.com/digikala-products/79d453ff03437f2fe57480c8903b4014eef8713c_1735200761.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
+    },
+    {
+      id: 3,
+      photo:
+        "https://dkstatics-public.digikala.com/digikala-products/d003f64e4be282e3ff35317a6f91149e0c04628b_1718456751.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
+    },
+    {
+      id: 4,
+      photo:
+        "https://dkstatics-public.digikala.com/digikala-products/587531c61c0ec193de0b90a504cb9690f9959627_1731758709.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80",
+    },
+  ];
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <div
+        className={`w-full min-h-screen flex flex-col justify-center items-center mx-auto shadow-lg`}
+        style={{
+          overflow: "auto",
+          scrollBehavior: "smooth",
+        }}
+      >
+        <div
+          className={`w-full `}
+        >
+          <HeaderStore />
+          <SliderStore />
+          <div className="w-full md:max-w-6xl mx-auto flex flex-col  items-start px-3 gap-4">
+            <CateguryStore />
+            <AmazingOffer />
+            <PhotoStore photo={firstBanner} />
+            <CategorizeByProducts Categurys={Items2} />
+            <BestVisited />
+            <PhotoStore photo={SeccendBanner} />
+            <BrandStore />
+            <BestSellerStore />
+            <CategorizeByProducts Categurys={item} />
+            <BannerStore />
+            <ProductList />
+            <HotProduct />
+            <BlogStore />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </>
   );
 }
