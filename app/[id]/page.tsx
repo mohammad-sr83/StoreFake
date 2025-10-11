@@ -1,9 +1,12 @@
 "use client";
 
-import ImgModal from "@/components/imageModal/ImgModal";
 import HeaderStore from "@/components/store/component/HeaderStore";
 import SliderStore from "@/components/store/component/SliderStore";
-import SimilarGoods from "@/components/store/product/SimilarGoods";
+import ProductInfoBox from "@/components/store/product/FeatureBox";
+import ProductCard from "@/components/store/product/ProductCard";
+
+import SliderPhotoProduct from "@/components/store/product/SliderPhoto";
+import SimilarGoods from "@/components/store/product/TabComponent/SimilarGoods";
 import TabMain from "@/components/store/product/TabMain";
 import {
   Breadcrumb,
@@ -12,16 +15,13 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { useTheme } from "next-themes";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  const { resolvedTheme} = useTheme();
   const params = useParams();
   const id = params?.id as string | undefined;
-  const [isshow, setisshow] = useState(false);
-  const [showpic, setshopic] = useState("");
+  const [color, setColor] = useState("");
 
   useEffect(() => {
     const style = document.createElement("style");
@@ -45,15 +45,10 @@ export default function Page() {
           scrollBehavior: "smooth",
         }}
       >
-        <div
-          className={`w-full `}
-        >
-          <HeaderStore />
-          <div className="w-full md:max-w-6xl mx-auto flex flex-col  items-start pt-3 px-3 gap-4">
-            <div
-              dir={'rtl'}
-              className="w-full flex items-center"
-            >
+        <div className={`w-full`}>
+          <HeaderStore isShowBottom={true} />
+          <div className="w-full md:max-w-7xl mx-auto flex flex-col  items-start pt-3 gap-4">
+            <div className="w-full flex items-center p-3">
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem>
@@ -68,54 +63,44 @@ export default function Page() {
                 </BreadcrumbList>
               </Breadcrumb>
             </div>
-            <div className="w-full h-1/4 grid grid-cols-1 md:grid-cols-[2fr_3fr_2fr] ">
-              <div
-                className={`order-3 md:order-1 flex justify-center text-2xl items-center bg-ColorChat flex-col h-full gap-8 ${
-                  resolvedTheme=== "dark"
-                    ? "text-white"
-                    : "text-black border-2 "
-                } w-full rounded-2xl`}
-              >
-                <div className="">
-                  {(123000).toLocaleString("fa-IR")}
-                </div>
-                <div className="w-full flex justify-between items-center p-2">
-                  <span className="p-1 bg-blue-600 rounded-full text-white text-sm">
-                    {(25).toLocaleString("fa-IR")}%
-                  </span>
-                  <span>تخفیف</span>
-                </div>
-                <span className="text-gray-500 text-left line-through">
-                  {(231000).toLocaleString("fa-IR")}
-                </span>
-              </div>
-              <div
-                dir={"rtl"}
-                className="order-2 md:order-2 w-full h-full flex flex-col p-4 gap-4"
-              >
-                <span className=" text-2xl ">تایتل محصول</span>
-                <span>تعداد موجود در انبار :4</span>
-                <span>تعداد موجود در انبار :4</span>
-                <span>تعداد موجود در انبار :4</span>
-              </div>
-              <div className="order-1 md:order-3 flex justify-between items-center flex-col gap-4">
-                <img
-                  className="w-full h-full object-cover rounded-2xl"
-                  onClick={() => (
-                    setshopic(
-                      "https://dkstatics-public.digikala.com/digikala-products/c2f09960ac13daf55ae8289f56600b1202c8da60_1681126500.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80"
-                    ),
-                    setisshow(true)
-                  )}
-                  src="https://dkstatics-public.digikala.com/digikala-products/c2f09960ac13daf55ae8289f56600b1202c8da60_1681126500.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80"
+            <div dir="ltr" className="w-full min-h-[10rem] md:min-h-[30rem] grid grid-cols-1 md:grid-cols-[2fr_3fr_3fr] ">
+              <div className={`w-full h-full`}>
+                <ProductCard
+                  id="123"
+                  title="هدفون بلوتوثی مدل ایرپادز پرو"
+                  model="NEW GLD"
+                  color={color}
+                  image="https://dkstatics-public.digikala.com/digikala-products/d6518a10b641b32833525b184f518e9ad0a38ec0_1751860865.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/format,webp/quality,q_90"
+                  price={398000}
+                  oldPrice={450000}
+                  stock={2}
                 />
-                <ImgModal
-                  title="نمایش عکس "
-                  value={showpic}
-                  setShow={setisshow}
-                  showModal={isshow}
-                  rounded={false}
+              </div>
+              <div className="order-2 md:order-2 w-full h-full">
+                <ProductInfoBox
+                  title="گوشی موبایل ژیواکو مدل F121"
+                  category={[
+                    { name: "خانه", href: "/" },
+                    { name: "موبایل", href: "/category/mobile" },
+                    { name: "ژیواکو", href: "/category/mobile/zhivaco" },
+                  ]}
+                  rating={3.8}
+                  reviews={321}
+                  questions={101}
+                  colors={["black", "red", "blue"]}
+                  selectedColor="black"
+                  features={[
+                    { key: "فناوری صفحه نمایش", value: "TFT" },
+                    { key: "اندازه", value: "1.8 اینچ" },
+                    { key: "حافظه داخلی", value: "32MB" },
+                    { key: "دوربین", value: "ندارد" },
+                    { key: "تعداد سیم کارت", value: "دو" },
+                  ]}
+                  specsId="product-specs"
                 />
+              </div>
+              <div className="order-1 md:order-3  h-full">
+                <SliderPhotoProduct />
               </div>
             </div>
             <div className="hidden md:flex w-full h-full">

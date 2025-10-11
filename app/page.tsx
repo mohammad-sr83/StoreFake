@@ -5,13 +5,13 @@ import CateguryStore from "@/components/store/Categury/CateguryStore";
 import AmazingOffer from "@/components/store/component/AmazingOffer";
 import BannerStore, { PhotoStore } from "@/components/store/component/bannerStore";
 import BestSellerStore from "@/components/store/component/BestSeller/bestSellerStore";
-import BestVisited from "@/components/store/component/BestVisited";
 import BlogStore from "@/components/store/component/blogStore";
 import CategorizeByProducts from "@/components/store/component/CategorizeByProducts";
 import HeaderStore from "@/components/store/component/HeaderStore";
 import HotProduct from "@/components/store/component/HotProduct";
 import ProductList from "@/components/store/component/ProductList";
 import SliderStore from "@/components/store/component/SliderStore";
+import StoryMode from "@/components/store/component/storyMode/StoryMode";
 
 export default function Page() {
   const firstBanner = [
@@ -83,13 +83,18 @@ export default function Page() {
           className={`w-full `}
         >
           <HeaderStore />
+          <div
+            className="w-full md:max-w-7xl mx-auto"
+          >
+            <StoryMode />
+          </div>
           <SliderStore />
-          <div className="w-full md:max-w-6xl mx-auto flex flex-col  items-start px-3 gap-4">
+          <div className="w-full md:max-w-7xl mx-auto flex flex-col  items-start px-3 gap-4">
             <CateguryStore />
             <AmazingOffer />
             <PhotoStore photo={firstBanner} />
             <CategorizeByProducts Categurys={Items2} />
-            <BestVisited />
+            {/* <SimilarGoods /> */}
             <PhotoStore photo={SeccendBanner} />
             <BrandStore />
             <BestSellerStore />
@@ -99,6 +104,7 @@ export default function Page() {
             <HotProduct />
             <BlogStore />
           </div>
+          {/* <Fotter /> */}
         </div>
       </div>
     </>

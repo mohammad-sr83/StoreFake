@@ -24,6 +24,7 @@ export default async function RootLayout({
 
   return (
     <html
+    dir="rtl"
       suppressHydrationWarning
       style={{ scrollBehavior: "smooth" }}
     >

@@ -26,8 +26,7 @@ export function DrawerMobaile({
   const startY = useRef<number | null>(null);
   const isDragging = useRef(false);
   const animationFrame = useRef<number | null>(null);
-  const [drawerHeight, setDrawerHeight] = useState(70); // درصد ارتفاع
-
+  const [drawerHeight, setDrawerHeight] = useState(70);
   const handleTouchStart = (e: React.TouchEvent) => {
     startY.current = e.touches[0].clientY;
     isDragging.current = true;
@@ -62,7 +61,7 @@ export function DrawerMobaile({
     <Drawer open={open} onClose={() => setOpen(false)}>
       <DrawerContent
         ref={drawerRef}
-        className="transition-all duration-300 ease-out max-w-[var(--containerSize)] mx-auto"
+        className="transition-all duration-300 ease-out max-w-(--containerSize) mx-auto"
         style={{
           zIndex: 80,
           height: `${drawerHeight}vh`,
@@ -81,7 +80,7 @@ export function DrawerMobaile({
 
           <ScrollArea className="flex-1 px-4">{children}</ScrollArea>
 
-          <DrawerFooter>{/* دکمه‌ها اینجا */}</DrawerFooter>
+          <DrawerFooter></DrawerFooter>
         </div>
       </DrawerContent>
     </Drawer>

@@ -60,9 +60,9 @@ export default function CateguryStore() {
     },
   ];
 
+
   return (
     <div
-      dir={"rtl"}
       className="w-full h-1/2 flex justify-between items-center flex-col gap-3 pt-3"
     >
       <h2 className="text-xl">دسته بندی ها</h2>

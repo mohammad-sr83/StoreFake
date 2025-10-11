@@ -1,3 +1,4 @@
+
 import { SwiperSlide } from "swiper/react";
 import {Sparkles } from "lucide-react"
 import CardBrand from "./brandCard";
@@ -15,12 +16,11 @@ export default function BrandStore() {
   
   return (
     <div
-      dir={"rtl"}
       className="w-full h-1/2 flex justify-between items-center flex-col gap-3 pt-3 mb-3 border-2 rounded-2xl"
     >
       <h2 className="text-xl flex justify-center items-center">
         <Sparkles className="text-yellow-500" />
-       برند ها
+        بهترین برند ها
       </h2>
       <div className="w-full flex justify-between items-center content-start gap-3 p-3">
         <SwiperComponentButton>

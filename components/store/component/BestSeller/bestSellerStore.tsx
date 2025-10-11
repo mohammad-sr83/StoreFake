@@ -1,10 +1,12 @@
+
 import Link from "next/link";
 import { SwiperSlide } from "swiper/react";
-import { Sparkles } from "lucide-react";
+import {Sparkles} from "lucide-react"
 import CardBestSeller from "./CardBestSeller";
 import { SwiperComponentButton } from "@/components/swiper/SwiperComonent";
 
 export default function BestSellerStore() {
+
   const array = [
     {
       id: 1,
@@ -90,19 +92,13 @@ export default function BestSellerStore() {
 
   return (
     <div
-      dir={"rtl"}
       className="w-full h-1/2 flex justify-between items-center flex-col gap-3 pt-3 mb-3 border-2 rounded-2xl"
     >
       <div className="w-full flex justify-center items-center relative">
         <Link className="absolute left-3 text-blue-600" href={""}>
           بیشتر
         </Link>
-        <h2
-          id="bestSeller"
-          className="text-xl flex justify-center items-center"
-        >
-          <Sparkles className="text-yellow-500" /> پر فروش ترین ها
-        </h2>
+        <h2     id="bestSeller" className="text-xl flex justify-center items-center"><Sparkles className="text-yellow-500" /> بیشترین فروش </h2>
       </div>
       <div className="w-full flex justify-between items-center content-start  p-3">
         <SwiperComponentButton>
