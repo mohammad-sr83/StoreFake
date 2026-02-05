@@ -2,7 +2,7 @@
 
 import MainMobaileCategury from "@/components/store/Categury/CateguryMain/MainMobaileCategury";
 import SelectSidebar from "@/components/store/Categury/CateguryMain/SelectSidebar";
-import HeaderStore from "@/components/store/component/HeaderStore";
+import HeaderStore from "@/components/store/component/headerItems/HeaderStore";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 

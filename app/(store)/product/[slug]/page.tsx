@@ -1,7 +1,7 @@
 "use client";
 
-import HeaderStore from "@/components/store/component/HeaderStore";
-import FilterProduct from "@/components/store/product/slug/FilterProduct";
+import HeaderStore from "@/components/store/component/headerItems/HeaderStore";
+import FilterProduct from "@/components/store/product/slug/Filter/FilterProduct";
 import MainProduct from "@/components/store/product/slug/MainProduct";
 
 

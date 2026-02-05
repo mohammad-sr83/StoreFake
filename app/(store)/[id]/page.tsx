@@ -1,6 +1,6 @@
 "use client";
 
-import HeaderStore from "@/components/store/component/HeaderStore";
+import HeaderStore from "@/components/store/component/headerItems/HeaderStore";
 import SliderStore from "@/components/store/component/SliderStore";
 import ProductInfoBox from "@/components/store/product/FeatureBox";
 import ProductCard from "@/components/store/product/ProductCard";

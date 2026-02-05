@@ -1,9 +1,9 @@
 "use client";
-import HeaderStore from "@/components/store/component/HeaderStore";
+import HeaderStore from "@/components/store/component/headerItems/HeaderStore";
 import SimilarGoods from "@/components/store/product/TabComponent/SimilarGoods";
 import ProductShoppingCard from "@/components/store/Shopping/productShoppingCard";
 import ShoppingCard from "@/components/store/Shopping/ShoppingCard";
-import { useCartStore } from "@/store/toolsStore/useCartStore";
+import { useCartStore } from "@/store/useCartStore";
 
 export default function Page() {
   const { items } = useCartStore();

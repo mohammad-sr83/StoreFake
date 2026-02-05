@@ -1,32 +1,34 @@
 "use client";
-
-import React, { useState, useEffect } from "react";
+import L, { LatLng } from "leaflet";
+import "leaflet/dist/leaflet.css";
+import React, { useEffect, useState } from "react";
 import {
   MapContainer,
-  TileLayer,
   Marker,
   Popup,
-  useMapEvent,
+  TileLayer,
   useMap,
+  useMapEvent,
 } from "react-leaflet";
-import L, { LatLng } from "leaflet";
 
 interface MapProps {
   fillLat: string;
   fillLng: string;
+  defLat?: string | number;
+  defLng?: string | number;
   setvalue?: (data: Partial<any>) => void;
-  label?: string;
   geoValue?: string;
-
+  editable?: boolean;
 }
 
 const MapComponent: React.FC<MapProps> = ({
   setvalue,
   fillLat,
   fillLng,
-
-
   geoValue,
+  defLat,
+  defLng,
+  editable = true,
 }) => {
   const [coordinates, setCoordinates] = useState<LatLng | null>(null);
   const [userLocation, setUserLocation] = useState<LatLng | null>(null);
@@ -62,10 +64,24 @@ const MapComponent: React.FC<MapProps> = ({
       const parsedCoords = parseGeoJson(geoValue);
       if (parsedCoords) {
         setCoordinates(parsedCoords);
-        setvalue?.({ [fillLng]: parsedCoords.lng, [fillLat]: parsedCoords.lat });
+        setvalue?.({
+          [fillLng]: parsedCoords.lng,
+          [fillLat]: parsedCoords.lat,
+        });
       }
     }
   }, [geoValue, setvalue, fillLat, fillLng]);
+
+  useEffect(() => {
+    if (!geoValue && defLat && defLng) {
+      const defaultLat = Number(defLat);
+      const defaultLng = Number(defLng);
+      if (!isNaN(defaultLat) && !isNaN(defaultLng)) {
+        const defCoords = new LatLng(defaultLat, defaultLng);
+        setCoordinates(defCoords);
+      }
+    }
+  }, [geoValue, defLat, defLng]);
 
   const handleGetUserLocation = () => {
     if (navigator.geolocation) {
@@ -74,17 +90,42 @@ const MapComponent: React.FC<MapProps> = ({
           const loc = new LatLng(pos.coords.latitude, pos.coords.longitude);
           setUserLocation(loc);
           setCoordinates(loc);
-          setvalue?.({ [fillLng]: loc.lng, [fillLat]: loc.lat });
+          setvalue?.({
+            [fillLng]: loc.lng,
+            [fillLat]: loc.lat,
+          });
         },
-        (err) => console.error("Error getting location", err)
+        (err) => {}
       );
     }
   };
 
   function LocationMarker() {
+    const map = useMap();
+    useEffect(() => {
+      if (coordinates) {
+        map.invalidateSize();
+        map.setView(coordinates, 12);
+      }
+    }, [coordinates, map]);
+
+    useEffect(() => {
+      if (coordinates && !editable) {
+        const timeout = setTimeout(() => {
+          map.invalidateSize();
+          map.setView(coordinates, 18);
+        }, 100);
+        return () => clearTimeout(timeout);
+      }
+    }, [coordinates, editable, map]);
+
     useMapEvent("click", (e) => {
+      if (!editable) return;
       setCoordinates(e.latlng);
-      setvalue?.({ [fillLng]: e.latlng.lng, [fillLat]: e.latlng.lat });
+      setvalue?.({
+        [fillLng]: e.latlng.lng,
+        [fillLat]: e.latlng.lat,
+      });
     });
 
     return (
@@ -97,7 +138,7 @@ const MapComponent: React.FC<MapProps> = ({
             </Popup>
           </Marker>
         )}
-        {userLocation && (
+        {editable && userLocation && (
           <Marker position={userLocation} icon={customIcon2}>
             <Popup>
               موقعیت فعلی شما: {userLocation.lat.toFixed(4)},{" "}
@@ -111,7 +152,9 @@ const MapComponent: React.FC<MapProps> = ({
 
   const MapControl = () => {
     const map = useMap();
+
     useEffect(() => {
+      if (!editable) return;
       //@ts-ignore
       const locationButton = L.control({ position: "topright" });
       locationButton.onAdd = () => {
@@ -134,27 +177,39 @@ const MapComponent: React.FC<MapProps> = ({
       return () => {
         map.removeControl(locationButton);
       };
-    }, [userLocation]);
+    }, [userLocation, editable]);
 
     return null;
   };
 
   return (
-   <div className="w-full h-[500px]">
-          <MapContainer
-            center={[35.6895, 51.389]}
-            zoom={12}
-            minZoom={5}
-            style={{ width: "100%", height: "100%" }}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <LocationMarker />
-            <MapControl />
-          </MapContainer>
-        </div>
+    <div
+      className={`w-full ${
+        editable ? "h-full sm:h-[40rem]" : "h-[15rem] sm:h-[10rem]"
+      } rounded-md overflow-hidden`}
+    >
+      <MapContainer
+        center={
+          coordinates ? [coordinates.lat, coordinates.lng] : [35.6895, 51.389]
+        }
+        zoom={!editable ? 13 : 18}
+        minZoom={5}
+        style={{ width: "100%", height: "100%" }}
+        dragging={editable}
+        scrollWheelZoom={editable}
+        doubleClickZoom={editable}
+        touchZoom={editable}
+        zoomControl={editable}
+        keyboard={editable}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <LocationMarker />
+        <MapControl />
+      </MapContainer>
+    </div>
   );
 };
 

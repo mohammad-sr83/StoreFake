@@ -1,5 +1,5 @@
 "use client";
-import { useCartStore } from "@/store/toolsStore/useCartStore";
+import { useCartStore } from "@/store/useCartStore";
 import {
   CarFront,
   Gauge,

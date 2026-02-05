@@ -1,5 +1,5 @@
 import { TCartItem } from "@/lib/Type/Type";
-import { useCartStore } from "@/store/toolsStore/useCartStore";
+import { useCartStore } from "@/store/useCartStore";
 import { useRouter } from "next/navigation";
 
 export default function ProductShoppingCard() {

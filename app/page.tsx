@@ -7,7 +7,7 @@ import BannerStore, { PhotoStore } from "@/components/store/component/bannerStor
 import BestSellerStore from "@/components/store/component/BestSeller/bestSellerStore";
 import BlogStore from "@/components/store/component/blogStore";
 import CategorizeByProducts from "@/components/store/component/CategorizeByProducts";
-import HeaderStore from "@/components/store/component/HeaderStore";
+import HeaderStore from "@/components/store/component/headerItems/HeaderStore";
 import HotProduct from "@/components/store/component/HotProduct";
 import ProductList from "@/components/store/component/ProductList";
 import SliderStore from "@/components/store/component/SliderStore";

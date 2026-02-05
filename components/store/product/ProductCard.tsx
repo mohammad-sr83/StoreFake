@@ -1,5 +1,5 @@
 import { TCartItem } from "@/lib/Type/Type";
-import { useCartStore } from "@/store/toolsStore/useCartStore";
+import { useCartStore } from "@/store/useCartStore";
 
 type ProductCardProps = {
   id: string | number;
